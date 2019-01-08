@@ -14,3 +14,12 @@
 .cm-s-leetcode span.cm-string-2 {color: rgb(193, 52, 32);}
 .cm-s-leetcode span.cm-error {color: #F00;}
 .cm-s-leetcode span.cm-qualifier {color: #555;}
+
+.CodeMirror-gutters{
+    border-right-color: #eeeeee;
+    background: #fff;
+}
+
+.CodeMirror{
+    font-family: 'Monaco','Menlo','Ubuntu Mono','Consolas','source-code-pro',monospace;
+}
