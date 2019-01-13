@@ -1,20 +1,34 @@
 window.onload = function () {
-    let el = document.getElementById("editor");
-    el.placeholder = "click code here...";
-    let myCodeMirror = CodeMirror.fromTextArea(el, {
+    var el = document.getElementById("editor");
+    // var initValue = "class Solution:\n\tdef func:\n\t\tpass";
+    var initValue = "1 + 2";
+    var myCodeMirror = CodeMirror.fromTextArea(el, {
         mode: "python",
         theme: "leetcode",
         keyMap: "sublime",
         lineNumbers: true,
         smartIndent: true,
+        indentUnit: 4,
+        indentWithTabs: true,
         lineWrapping: true,
         gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers"],
         foldGutter: true,
+        autofocus: true,
         matchBrackets: true,
         autoCloseBrackets: true,
-        styleActiveLine: true
+        styleActiveLine: true,
     });
+    myCodeMirror.setOption("value", initValue);
     myCodeMirror.on("keypress", function() {
         myCodeMirror.showHint(); // 注意，注释了show-hint.js第131行的代码（阻止了代码补全，同时提供智能提示）
     });
+    var test = document.getElementById("test");
+    test.onclick = function() {
+        var value = myCodeMirror.getValue();
+        axios.post("http://localhost/api/runcode", {
+            code: value
+        }).then(function(res) {
+            console.log(res);
+        });
+    };
 };
